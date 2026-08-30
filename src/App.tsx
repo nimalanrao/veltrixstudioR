@@ -43,8 +43,8 @@ export default function App() {
   const isScrollingRef = useRef(false);
   const touchStartY = useRef(0);
 
-  const iframeSnippet = `<iframe src="https://veltrixstudio.lol/widget.html" width="380" height="230" frameborder="0" style="border-radius:20px;overflow:hidden;" title="Veltrix Studio Widget"></iframe>`;
-  const reactSnippet = `<iframe\n  src="https://veltrixstudio.lol/widget.html"\n  width="380"\n  height="230"\n  className="rounded-2xl border-0 overflow-hidden shadow-2xl"\n  title="Veltrix Studio Widget"\n/>`;
+  const iframeSnippet = `<iframe src="https://veltrixstudio.lol/widget.html" width="460" height="360" frameborder="0" style="border-radius:16px;overflow:hidden;" title="Veltrix Studio Discord Widget"></iframe>`;
+  const reactSnippet = `<iframe\n  src="https://veltrixstudio.lol/widget.html"\n  width="460"\n  height="360"\n  className="rounded-2xl border-0 overflow-hidden shadow-2xl"\n  title="Veltrix Studio Discord Widget"\n/>`;
 
   const copyToClipboard = (text: string, type: 'iframe' | 'react') => {
     navigator.clipboard.writeText(text);
@@ -276,17 +276,17 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#05060A]/80 via-[#05060A]/50 to-[#05060A]" />
       </div>
 
-      {/* FLOATING TOP-RIGHT COMMUNITY & EMBED WIDGET BUTTON */}
+      {/* FLOATING TOP-RIGHT DISCORD & EMBED WIDGET BUTTON */}
       <header className="fixed top-4 right-4 sm:top-5 sm:right-6 z-40 flex items-center gap-2.5">
         <button
           type="button"
           onClick={() => setIsWidgetModalOpen(true)}
-          className="group inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/10 hover:bg-white text-white hover:text-black border border-white/15 backdrop-blur-xl transition-all duration-200 text-[11px] sm:text-xs font-bold tracking-wider uppercase shadow-lg shadow-black/40"
-          title="Get embeddable Veltrix Studio Widget"
+          className="group inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#5865F2]/20 hover:bg-[#5865F2] text-white border border-[#5865F2]/40 backdrop-blur-xl transition-all duration-200 text-[11px] sm:text-xs font-bold tracking-wider uppercase shadow-lg shadow-black/40"
+          title="Get Discord Message Widget"
         >
-          <Code2 size={13} className="transition-transform group-hover:scale-110" />
-          <span>EMBED WIDGET</span>
-          <Sparkles size={11} className="text-amber-400 group-hover:text-amber-600 animate-pulse" />
+          <DiscordIcon className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
+          <span>DISCORD WIDGET</span>
+          <Sparkles size={11} className="text-amber-400 group-hover:text-amber-200 animate-pulse" />
         </button>
       </header>
 
@@ -402,8 +402,8 @@ export default function App() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full mb-3.5">
               {/* Discord */}
               <div className="group p-5 rounded-2xl bg-[#0c0e18]/90 border border-white/10 text-white flex flex-col items-center text-center shadow-lg">
-                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white mb-2.5">
-                  <DiscordIcon className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-[#5865F2]/20 flex items-center justify-center text-white mb-2.5">
+                  <DiscordIcon className="w-5 h-5 text-[#5865F2] group-hover:text-white transition-colors" />
                 </div>
 
                 <h3 className="text-sm font-bold uppercase tracking-wider mb-0.5 font-gondens text-lg text-white">
@@ -417,7 +417,7 @@ export default function App() {
                   href="https://discord.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-black text-[11px] font-bold tracking-wider uppercase transition-colors duration-200 w-full justify-center"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#5865F2] hover:bg-[#4752c4] text-white text-[11px] font-bold tracking-wider uppercase transition-colors duration-200 w-full justify-center shadow-lg shadow-[#5865F2]/25"
                 >
                   <span>JOIN DISCORD</span>
                   <ArrowRight size={12} />
@@ -476,14 +476,14 @@ export default function App() {
               </a>
             </div>
 
-            {/* Widget embed CTA shortcut */}
+            {/* Discord Widget Embed CTA Button */}
             <button
               type="button"
               onClick={() => setIsWidgetModalOpen(true)}
-              className="text-[10px] font-mono tracking-widest text-slate-400 hover:text-white transition-colors uppercase inline-flex items-center gap-1.5 py-1"
+              className="text-[10px] font-mono tracking-widest text-[#949ba4] hover:text-[#5865F2] transition-colors uppercase inline-flex items-center gap-1.5 py-1"
             >
               <Code2 size={12} />
-              <span>Embed Veltrix Widget on your website</span>
+              <span>Embed Discord Message Widget</span>
             </button>
           </div>
 
@@ -507,20 +507,20 @@ export default function App() {
         </section>
       </div>
 
-      {/* EMBED WIDGET MODAL DIALOG */}
+      {/* DISCORD MESSAGE WIDGET EMBED MODAL */}
       {isWidgetModalOpen && (
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Veltrix Studio Widget Embed Generator"
-          className="fixed inset-0 z-[300] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto animate-fade-in"
+          aria-label="Veltrix Studio Discord Widget Embed Generator"
+          className="fixed inset-0 z-[300] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto animate-fade-in"
         >
-          <div className="bg-[#0C0E18] border border-white/20 rounded-3xl p-6 max-w-lg w-full text-white shadow-2xl relative">
+          <div className="bg-[#1e1f22] border border-[#5865F2]/30 rounded-2xl p-5 sm:p-6 max-w-xl w-full text-white shadow-2xl relative my-auto">
             {/* Close button */}
             <button
               type="button"
               onClick={() => setIsWidgetModalOpen(false)}
-              className="absolute top-5 right-5 p-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-black transition-colors"
+              className="absolute top-4 right-4 p-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-black transition-colors"
               aria-label="Close widget modal"
             >
               <X size={16} />
@@ -528,47 +528,56 @@ export default function App() {
 
             {/* Modal Header */}
             <div className="flex items-center gap-2.5 mb-1">
-              <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-white">
-                <Code2 size={15} />
+              <div className="w-8 h-8 rounded-lg bg-[#5865F2] flex items-center justify-center text-white shadow-md">
+                <DiscordIcon className="w-5 h-5 text-white" />
               </div>
-              <h3 className="font-gondens text-2xl uppercase tracking-wider text-white">
-                Veltrix Embed Widget
-              </h3>
+              <div>
+                <h3 className="font-gondens text-2xl uppercase tracking-wider text-white leading-none">
+                  Discord Message Widget
+                </h3>
+                <span className="text-[10px] font-mono text-[#949ba4] uppercase tracking-widest">
+                  Live Interactive Discord Theme
+                </span>
+              </div>
             </div>
-            <p className="text-xs text-slate-400 mb-5">
-              Embed the official Veltrix Studio live community card on your portfolio, gaming blog, or website.
+
+            <p className="text-xs text-[#949ba4] mb-4">
+              Embed this clean, authentic Discord message widget on your website, Notion page, or dev blog.
             </p>
 
-            {/* Widget Preview Box */}
-            <div className="w-full bg-[#05060A] border border-white/10 rounded-2xl p-3.5 mb-5 flex flex-col items-center">
-              <div className="text-[10px] font-mono uppercase tracking-widest text-slate-400 mb-2 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Live Interactive Preview</span>
+            {/* Widget Live Preview Frame */}
+            <div className="w-full bg-[#2b2d31] border border-white/10 rounded-xl p-2 sm:p-3 mb-4 flex flex-col items-center">
+              <div className="w-full flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-[#949ba4] mb-1.5 px-1">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#23a55a] animate-pulse" />
+                  <span>Discord Widget Preview</span>
+                </span>
+                <span className="text-[#5865F2] font-semibold">Interactive</span>
               </div>
               <iframe
                 src="/widget.html"
                 width="100%"
-                height="195"
-                className="rounded-xl border border-white/10 w-full"
-                title="Veltrix Studio Embed Preview"
+                height="340"
+                className="rounded-lg border border-[#313338] w-full bg-[#313338]"
+                title="Veltrix Studio Discord Message Widget Preview"
               />
             </div>
 
             {/* Code Snippets Box */}
-            <div className="space-y-3 mb-6">
+            <div className="space-y-3 mb-4">
               {/* HTML iFrame Snippet */}
               <div>
-                <div className="flex items-center justify-between text-[11px] font-mono text-slate-300 mb-1">
-                  <span>HTML (iFrame)</span>
+                <div className="flex items-center justify-between text-[11px] font-mono text-[#dbdee1] mb-1">
+                  <span>HTML Embed Code</span>
                   <button
                     type="button"
                     onClick={() => copyToClipboard(iframeSnippet, 'iframe')}
-                    className="inline-flex items-center gap-1 text-[10px] text-white hover:text-slate-300 font-sans uppercase font-bold"
+                    className="inline-flex items-center gap-1 text-[10px] text-[#5865F2] hover:text-white font-sans uppercase font-bold transition-colors"
                   >
                     {copiedCodeType === 'iframe' ? (
                       <>
-                        <Check size={12} className="text-emerald-400" />
-                        <span className="text-emerald-400">Copied!</span>
+                        <Check size={12} className="text-[#23a55a]" />
+                        <span className="text-[#23a55a]">Copied!</span>
                       </>
                     ) : (
                       <>
@@ -578,24 +587,24 @@ export default function App() {
                     )}
                   </button>
                 </div>
-                <pre className="bg-black/60 border border-white/10 rounded-lg p-2.5 text-[10px] font-mono text-slate-300 overflow-x-auto select-all">
+                <pre className="bg-[#111214] border border-white/10 rounded-lg p-2.5 text-[10px] font-mono text-[#dbdee1] overflow-x-auto select-all">
                   {iframeSnippet}
                 </pre>
               </div>
 
               {/* React Snippet */}
               <div>
-                <div className="flex items-center justify-between text-[11px] font-mono text-slate-300 mb-1">
-                  <span>React / JSX</span>
+                <div className="flex items-center justify-between text-[11px] font-mono text-[#dbdee1] mb-1">
+                  <span>React / JSX Component</span>
                   <button
                     type="button"
                     onClick={() => copyToClipboard(reactSnippet, 'react')}
-                    className="inline-flex items-center gap-1 text-[10px] text-white hover:text-slate-300 font-sans uppercase font-bold"
+                    className="inline-flex items-center gap-1 text-[10px] text-[#5865F2] hover:text-white font-sans uppercase font-bold transition-colors"
                   >
                     {copiedCodeType === 'react' ? (
                       <>
-                        <Check size={12} className="text-emerald-400" />
-                        <span className="text-emerald-400">Copied!</span>
+                        <Check size={12} className="text-[#23a55a]" />
+                        <span className="text-[#23a55a]">Copied!</span>
                       </>
                     ) : (
                       <>
@@ -605,7 +614,7 @@ export default function App() {
                     )}
                   </button>
                 </div>
-                <pre className="bg-black/60 border border-white/10 rounded-lg p-2.5 text-[10px] font-mono text-slate-300 overflow-x-auto select-all">
+                <pre className="bg-[#111214] border border-white/10 rounded-lg p-2.5 text-[10px] font-mono text-[#dbdee1] overflow-x-auto select-all">
                   {reactSnippet}
                 </pre>
               </div>
@@ -617,7 +626,7 @@ export default function App() {
                 href="/widget.html"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs text-[#949ba4] hover:text-[#5865F2] transition-colors"
               >
                 <span>Open Standalone Widget</span>
                 <ExternalLink size={12} />
@@ -626,7 +635,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setIsWidgetModalOpen(false)}
-                className="px-4 py-1.5 rounded-full bg-white text-black text-xs font-bold uppercase hover:bg-slate-200 transition-colors"
+                className="px-4 py-1.5 rounded-full bg-[#5865F2] text-white text-xs font-bold uppercase hover:bg-[#4752c4] transition-colors shadow-md"
               >
                 Done
               </button>

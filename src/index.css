@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'Gondens';
-  src: url('/Gondens DEMO.otf') format('opentype');
+  src: url('./assets/fonts/Gondens DEMO.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
