@@ -1,0 +1,19 @@
+{
+  "name": "Veltrix Studio",
+  "short_name": "Veltrix",
+  "description": "Official Veltrix Studio website - Home of Grow a Brainrot Baby on Roblox. Join the Discord community and Roblox group.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05060A",
+  "theme_color": "#05060A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "entertainment", "social"]
+}
