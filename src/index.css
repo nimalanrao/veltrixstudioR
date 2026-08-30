@@ -4,8 +4,8 @@
 
 @font-face {
   font-family: 'Gondens';
-  src: url('./assets/fonts/Gondens DEMO.otf') format('opentype');
-  font-weight: normal;
+  src: url('./assets/fonts/gondens.otf') format('opentype');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -17,7 +17,7 @@
     padding: 0;
     background-color: #05060A;
     color: #F1F5F9;
-    font-family: 'Google Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -40,12 +40,12 @@
 }
 
 .font-google-sans {
-  font-family: 'Google Sans', 'Product Sans', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .font-gondens {
-  font-family: 'Gondens', 'Big Shoulders Display', 'Teko', 'Bebas Neue', 'Anton', Impact, sans-serif;
-  font-stretch: ultra-condensed;
+  font-family: 'Gondens', 'Big Shoulders Display', 'Bebas Neue', 'Anton', 'Teko', Impact, sans-serif;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .animate-marquee-left-to-right {
-  animation: marqueeLeftToRight 20s linear infinite;
+  animation: marqueeLeftToRight 22s linear infinite;
 }
 
 /* Infinite Marquee moving right to left (reverse) */
@@ -74,20 +74,5 @@
 }
 
 .animate-marquee-right-to-left {
-  animation: marqueeRightToLeft 20s linear infinite;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: marqueeRightToLeft 22s linear infinite;
 }

@@ -76,14 +76,10 @@ export default function App() {
     setLoadPercent(15);
 
     const warmPipeline = async () => {
-      // Step 1: Pre-warm Font GPU Glyph Atlases
+      // Step 1: Pre-warm fonts safely
       if (document.fonts) {
         try {
-          await Promise.all([
-            document.fonts.load('bold 24px "Google Sans"'),
-            document.fonts.load('900 64px "Big Shoulders Display"'),
-            document.fonts.ready,
-          ]);
+          await document.fonts.ready;
         } catch (_) {}
       }
 
@@ -104,13 +100,13 @@ export default function App() {
         }
       }
 
-      // Step 3: Increment real load percentage smoothly
+      // Step 3: Smooth progress increment
       const timer = setInterval(() => {
         if (isCancelled) {
           clearInterval(timer);
           return;
         }
-        progress += Math.floor(Math.random() * 12) + 10;
+        progress += Math.floor(Math.random() * 14) + 12;
         if (progress >= 100) {
           progress = 100;
           setLoadPercent(100);
@@ -119,11 +115,11 @@ export default function App() {
             if (!isCancelled) {
               setIsLoading(false);
             }
-          }, 250);
+          }, 200);
         } else {
           setLoadPercent(progress);
         }
-      }, 40);
+      }, 35);
     };
 
     warmPipeline();
@@ -220,7 +216,7 @@ export default function App() {
         </svg>
       </div>
 
-      {/* 0) PURE BLACK & WHITE MINIMALIST LOADING SCREEN (BOLD GOOGLE SANS) */}
+      {/* 0) PURE BLACK & WHITE MINIMALIST LOADING SCREEN */}
       <div
         role="status"
         aria-live="polite"
@@ -229,7 +225,7 @@ export default function App() {
         }`}
       >
         <div className="flex flex-col items-center">
-          <div className="text-xl sm:text-2xl font-bold tracking-[0.2em] text-white uppercase select-none font-google-sans">
+          <div className="text-xl sm:text-2xl font-bold tracking-[0.25em] text-white uppercase select-none font-sans">
             Veltrix studio
           </div>
           <div className="w-36 sm:w-48 h-[2px] bg-white/20 rounded-full overflow-hidden mt-4">
@@ -268,7 +264,7 @@ export default function App() {
           className="h-screen w-full flex flex-col justify-between overflow-hidden relative"
         >
           {/* TOP MARQUEE: VeltrixStudio.lol (LEFT TO RIGHT) */}
-          <div className="w-full overflow-hidden border-b border-white/10 bg-[#05060A]/85 backdrop-blur-xl py-2.5 sm:py-3 will-change-transform">
+          <div className="w-full overflow-hidden border-b border-white/10 bg-[#05060A]/85 backdrop-blur-xl py-3 will-change-transform">
             <div className="flex w-max animate-marquee-left-to-right">
               {[...Array(10)].map((_, i) => (
                 <span
@@ -282,22 +278,17 @@ export default function App() {
             </div>
           </div>
 
-          {/* ULTRA-MASSIVE PURE WHITE "COMING SOON" */}
-          <div className="flex-1 flex items-center justify-center w-full px-[20px] overflow-hidden">
+          {/* ULTRA-MASSIVE CRISP "COMING SOON" */}
+          <div className="flex-1 flex items-center justify-center w-full px-4 sm:px-8 overflow-hidden">
             <div
-              className="transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity,filter,transform]"
+              className="transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity,filter,transform] w-full text-center"
               style={{
                 opacity: page === 0 ? 1 : 0,
                 filter: page === 0 ? 'blur(0px)' : 'blur(35px)',
-                transform: page === 0 ? 'scale(1) translateY(0px)' : 'scale(0.9) translateY(40px)',
+                transform: page === 0 ? 'scale(1) translateY(0px)' : 'scale(0.95) translateY(40px)',
               }}
             >
-              <h1
-                className="whitespace-nowrap font-gondens font-black text-[clamp(5.5rem,22vw,30rem)] tracking-tight uppercase leading-[0.65] text-white text-center select-none origin-center transform-gpu drop-shadow-[0_25px_60px_rgba(255,255,255,0.3)]"
-                style={{
-                  transform: `scaleY(${typeof window !== 'undefined' && window.innerWidth >= 640 ? 2.1 : 1.65})`,
-                }}
-              >
+              <h1 className="w-full font-gondens font-black text-[clamp(3.5rem,15vw,13.5rem)] tracking-tight uppercase leading-[0.85] text-white text-center select-none transform-gpu drop-shadow-[0_20px_50px_rgba(255,255,255,0.25)]">
                 COMING SOON
               </h1>
             </div>
@@ -347,7 +338,7 @@ export default function App() {
               transform: page === 1 ? 'scale(1) translateY(0px)' : 'scale(0.94) translateY(30px)',
             }}
           >
-            <h2 className="font-gondens font-black text-5xl sm:text-7xl md:text-8xl uppercase tracking-tight text-white mb-2 scale-y-[1.25] origin-center">
+            <h2 className="font-gondens font-black text-5xl sm:text-7xl md:text-8xl uppercase tracking-tight text-white mb-2 leading-none">
               JOIN US
             </h2>
 
@@ -438,7 +429,7 @@ export default function App() {
 
           {/* Bottom Container: Bottom Marquee (RIGHT TO LEFT REVERSE MOTION) */}
           <footer
-            className="w-full overflow-hidden border-t border-white/10 bg-[#05060A]/85 backdrop-blur-xl py-2.5 sm:py-3 cursor-pointer will-change-transform"
+            className="w-full overflow-hidden border-t border-white/10 bg-[#05060A]/85 backdrop-blur-xl py-3 cursor-pointer will-change-transform"
             onClick={() => handleScrollAction('up')}
           >
             <div className="flex w-max animate-marquee-right-to-left">
