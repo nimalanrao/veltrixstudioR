@@ -5,13 +5,12 @@
 
 User-agent: *
 Allow: /
-Allow: /widget.html
 Allow: /assets/
 Allow: /favicon.svg
 Allow: /og-image.svg
 Allow: /site.webmanifest
 
-# Crawlers & AI Bot Directives (Explicitly Allow for 100% SEO Indexing & AI Search engines)
+# Crawlers & AI Bot Directives (Explicitly Allow for 100% SEO Indexing)
 User-agent: Googlebot
 Allow: /
 

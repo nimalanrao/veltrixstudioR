@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <!-- Homepage / Main Coming Soon Landing & Community Hub -->
+  <!-- Homepage / Main Landing & Community Hub -->
   <url>
     <loc>https://veltrixstudio.lol/</loc>
     <lastmod>2026-08-30T00:00:00+00:00</lastmod>
@@ -14,13 +14,5 @@
       <image:title>Veltrix Studio - Grow a Brainrot Baby Official Roblox Game</image:title>
       <image:caption>Veltrix Studio Roblox Game Studio, official Discord, and Grow a Brainrot Baby</image:caption>
     </image:image>
-  </url>
-
-  <!-- Embeddable Community Widget -->
-  <url>
-    <loc>https://veltrixstudio.lol/widget.html</loc>
-    <lastmod>2026-08-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
 </urlset>

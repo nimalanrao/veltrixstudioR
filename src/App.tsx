@@ -76,10 +76,14 @@ export default function App() {
     setLoadPercent(15);
 
     const warmPipeline = async () => {
-      // Step 1: Pre-warm fonts safely
+      // Step 1: Pre-warm Font GPU Glyph Atlases
       if (document.fonts) {
         try {
-          await document.fonts.ready;
+          await Promise.all([
+            document.fonts.load('bold 24px "Google Sans"'),
+            document.fonts.load('900 64px "Big Shoulders Display"'),
+            document.fonts.ready,
+          ]);
         } catch (_) {}
       }
 
@@ -100,13 +104,13 @@ export default function App() {
         }
       }
 
-      // Step 3: Smooth progress increment
+      // Step 3: Increment real load percentage smoothly
       const timer = setInterval(() => {
         if (isCancelled) {
           clearInterval(timer);
           return;
         }
-        progress += Math.floor(Math.random() * 14) + 12;
+        progress += Math.floor(Math.random() * 12) + 10;
         if (progress >= 100) {
           progress = 100;
           setLoadPercent(100);
@@ -115,11 +119,11 @@ export default function App() {
             if (!isCancelled) {
               setIsLoading(false);
             }
-          }, 200);
+          }, 250);
         } else {
           setLoadPercent(progress);
         }
-      }, 35);
+      }, 40);
     };
 
     warmPipeline();
@@ -182,8 +186,8 @@ export default function App() {
 
     window.addEventListener('wheel', handleWheel, { passive: true });
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       window.removeEventListener('wheel', handleWheel);
@@ -194,11 +198,10 @@ export default function App() {
   }, [handleScrollAction]);
 
   return (
-    <main className="h-screen w-full bg-[#05060A] text-white selection:bg-white selection:text-black select-none overflow-hidden fixed inset-0">
+    <div className="h-screen w-full bg-[#05060A] text-white selection:bg-white selection:text-black select-none overflow-hidden fixed inset-0">
       {/* MIX-BLEND-DIFFERENCE COLOR-INVERTING CUSTOM CURSOR */}
       <div
         ref={cursorRef}
-        aria-hidden="true"
         className="fixed top-0 left-0 pointer-events-none z-[99999] mix-blend-difference will-change-transform flex items-center justify-center transition-transform duration-75 ease-out"
         style={{ transform: 'translate3d(-100px, -100px, 0)' }}
       >
@@ -216,18 +219,16 @@ export default function App() {
         </svg>
       </div>
 
-      {/* 0) PURE BLACK & WHITE MINIMALIST LOADING SCREEN */}
+      {/* 0) PURE BLACK & WHITE MINIMALIST LOADING SCREEN (BOLD GOOGLE SANS) */}
       <div
-        role="status"
-        aria-live="polite"
         className={`fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center transition-opacity duration-500 ease-in-out ${
           isLoading ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
         <div className="flex flex-col items-center">
-          <div className="text-xl sm:text-2xl font-bold tracking-[0.25em] text-white uppercase select-none font-sans">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-[0.2em] text-white uppercase select-none font-google-sans">
             Veltrix studio
-          </div>
+          </h1>
           <div className="w-36 sm:w-48 h-[2px] bg-white/20 rounded-full overflow-hidden mt-4">
             <div
               className="h-full bg-white transition-all duration-150 ease-out"
@@ -238,7 +239,7 @@ export default function App() {
       </div>
 
       {/* AMBIENT CINEMATIC VIDEO BACKGROUND (20PX BLUR, GPU OPTIMIZED) */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none transform-gpu" aria-hidden="true">
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none transform-gpu">
         <video
           ref={videoRef}
           src={VIDEO_URL}
@@ -259,12 +260,9 @@ export default function App() {
         {/* ========================================================= */}
         {/* SCREEN 1: COMING SOON WITH ACTIVE BLUR-FADE ON SCROLL */}
         {/* ========================================================= */}
-        <section
-          aria-label="Coming Soon Screen"
-          className="h-screen w-full flex flex-col justify-between overflow-hidden relative"
-        >
+        <div className="h-screen w-full flex flex-col justify-between overflow-hidden relative">
           {/* TOP MARQUEE: VeltrixStudio.lol (LEFT TO RIGHT) */}
-          <div className="w-full overflow-hidden border-b border-white/10 bg-[#05060A]/85 backdrop-blur-xl py-3 will-change-transform">
+          <div className="w-full overflow-hidden border-b border-white/10 bg-[#05060A]/85 backdrop-blur-xl py-2.5 sm:py-3 will-change-transform">
             <div className="flex w-max animate-marquee-left-to-right">
               {[...Array(10)].map((_, i) => (
                 <span
@@ -278,17 +276,22 @@ export default function App() {
             </div>
           </div>
 
-          {/* ULTRA-MASSIVE CRISP "COMING SOON" */}
-          <div className="flex-1 flex items-center justify-center w-full px-4 sm:px-8 overflow-hidden">
+          {/* ULTRA-MASSIVE PURE WHITE "COMING SOON" */}
+          <div className="flex-1 flex items-center justify-center w-full px-[20px] overflow-hidden">
             <div
-              className="transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity,filter,transform] w-full text-center"
+              className="transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity,filter,transform]"
               style={{
                 opacity: page === 0 ? 1 : 0,
                 filter: page === 0 ? 'blur(0px)' : 'blur(35px)',
-                transform: page === 0 ? 'scale(1) translateY(0px)' : 'scale(0.95) translateY(40px)',
+                transform: page === 0 ? 'scale(1) translateY(0px)' : 'scale(0.9) translateY(40px)',
               }}
             >
-              <h1 className="w-full font-gondens font-black text-[clamp(3.5rem,15vw,13.5rem)] tracking-tight uppercase leading-[0.85] text-white text-center select-none transform-gpu drop-shadow-[0_20px_50px_rgba(255,255,255,0.25)]">
+              <h1
+                className="whitespace-nowrap font-gondens font-black text-[clamp(5.5rem,22vw,30rem)] tracking-tight uppercase leading-[0.65] text-white text-center select-none origin-center transform-gpu drop-shadow-[0_25px_60px_rgba(255,255,255,0.3)]"
+                style={{
+                  transform: `scaleY(${typeof window !== 'undefined' && window.innerWidth >= 640 ? 2.1 : 1.65})`,
+                }}
+              >
                 COMING SOON
               </h1>
             </div>
@@ -310,15 +313,12 @@ export default function App() {
               <span>↓ SCROLL TO JOIN US ↓</span>
             </button>
           </div>
-        </section>
+        </div>
 
         {/* ========================================================= */}
         {/* SCREEN 2: "JOIN US" (WITH BOTTOM MARQUEE IN FOOTER AREA) */}
         {/* ========================================================= */}
-        <section
-          aria-label="Community Hub and Join Links"
-          className="h-screen w-full flex flex-col justify-between items-center border-t border-white/10 bg-gradient-to-b from-transparent via-[#07090F]/90 to-[#05060A] relative overflow-hidden"
-        >
+        <div className="h-screen w-full flex flex-col justify-between items-center border-t border-white/10 bg-gradient-to-b from-transparent via-[#07090F]/90 to-[#05060A] relative overflow-hidden">
           {/* Top Return Button */}
           <button
             type="button"
@@ -338,7 +338,7 @@ export default function App() {
               transform: page === 1 ? 'scale(1) translateY(0px)' : 'scale(0.94) translateY(30px)',
             }}
           >
-            <h2 className="font-gondens font-black text-5xl sm:text-7xl md:text-8xl uppercase tracking-tight text-white mb-2 leading-none">
+            <h2 className="font-gondens font-black text-5xl sm:text-7xl md:text-8xl uppercase tracking-tight text-white mb-2 scale-y-[1.25] origin-center">
               JOIN US
             </h2>
 
@@ -349,7 +349,7 @@ export default function App() {
             </p>
 
             {/* Centered Social Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full mb-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full mb-4">
               {/* Discord */}
               <div className="group p-5 rounded-2xl bg-[#0c0e18]/90 border border-white/10 text-white flex flex-col items-center text-center shadow-lg">
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white mb-2.5">
@@ -428,8 +428,8 @@ export default function App() {
           </div>
 
           {/* Bottom Container: Bottom Marquee (RIGHT TO LEFT REVERSE MOTION) */}
-          <footer
-            className="w-full overflow-hidden border-t border-white/10 bg-[#05060A]/85 backdrop-blur-xl py-3 cursor-pointer will-change-transform"
+          <div
+            className="w-full overflow-hidden border-t border-white/10 bg-[#05060A]/85 backdrop-blur-xl py-2.5 sm:py-3 cursor-pointer will-change-transform"
             onClick={() => handleScrollAction('up')}
           >
             <div className="flex w-max animate-marquee-right-to-left">
@@ -443,9 +443,9 @@ export default function App() {
                 </span>
               ))}
             </div>
-          </footer>
-        </section>
+          </div>
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
