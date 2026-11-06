@@ -35,6 +35,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadPercent, setLoadPercent] = useState(0);
   const [page, setPage] = useState(0); // 0 = Screen 1, 1 = Screen 2
+  const [xNotice, setXNotice] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -343,7 +344,7 @@ export default function App() {
             </h2>
 
             <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto mb-6 leading-relaxed text-center">
-              We're releasing <span className="text-white font-semibold">Grow a Brainrot Baby!</span> very soon.<br className="hidden sm:inline" />
+              We're releasing <span className="text-white font-semibold">Grow a Babyrot!</span> very soon.<br className="hidden sm:inline" />
               Join our Discord and follow us on X.com for exclusive sneak peeks,<br className="hidden sm:inline" />
               and join our Roblox group for early playtests and launch codes.
             </p>
@@ -364,7 +365,7 @@ export default function App() {
                 </p>
 
                 <a
-                  href="https://discord.com"
+                  href="https://discord.gg/3V8Epgyg38"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-black text-[11px] font-bold tracking-wider uppercase transition-colors duration-200 w-full justify-center"
@@ -375,27 +376,31 @@ export default function App() {
               </div>
 
               {/* X.com */}
-              <div className="group p-5 rounded-2xl bg-[#0c0e18]/90 border border-white/10 text-white flex flex-col items-center text-center shadow-lg">
-                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white mb-2.5">
+              <div className="group relative p-5 rounded-2xl bg-[#0c0e18]/50 border border-white/5 text-slate-500 flex flex-col items-center text-center shadow-lg transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-500 mb-2.5">
                   <XIcon className="w-4 h-4" />
                 </div>
 
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-0.5 font-gondens text-lg text-white">
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-0.5 font-gondens text-lg text-slate-400">
                   X.COM
                 </h3>
-                <p className="text-[10px] text-slate-400 mb-3">
+                <p className="text-[10px] text-slate-500 mb-3">
                   Follow for official announcements
                 </p>
 
-                <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-black text-[11px] font-bold tracking-wider uppercase transition-colors duration-200 w-full justify-center"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setXNotice(true);
+                    setTimeout(() => setXNotice(false), 2200);
+                  }}
+                  className="group/btn relative inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 text-slate-500 text-[11px] font-bold tracking-wider uppercase cursor-not-allowed w-full justify-center transition-colors hover:bg-white/10 hover:text-slate-400"
                 >
-                  <span>FOLLOW @VELTRIX</span>
-                  <ArrowRight size={12} />
-                </a>
+                  <span>{xNotice ? "UNAVAILABLE" : "UNAVAILABLE"}</span>
+                </button>
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-[9px] font-mono tracking-widest text-slate-500 uppercase mt-1">
+                  UNAVAILABLE
+                </div>
               </div>
             </div>
 
@@ -416,7 +421,7 @@ export default function App() {
               </div>
 
               <a
-                href="https://www.roblox.com"
+                href="https://www.roblox.com/communities/34721715/Vhite-Studios#!/about"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white text-white hover:text-black text-[11px] font-bold tracking-wider uppercase transition-colors duration-200"
