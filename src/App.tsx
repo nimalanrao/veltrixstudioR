@@ -346,7 +346,7 @@ export default function App() {
             <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto mb-6 leading-relaxed text-center">
               We're releasing <span className="text-white font-semibold">Grow a Babyrot!</span> very soon.<br className="hidden sm:inline" />
               Join our Discord and follow us on X.com for exclusive sneak peeks,<br className="hidden sm:inline" />
-              and join our Roblox group for early playtests and launch codes.
+              and join Vhite Studios on Roblox for early playtests and launch codes.
             </p>
 
             {/* Centered Social Cards */}
@@ -412,10 +412,10 @@ export default function App() {
                 </div>
                 <div>
                   <div className="text-xs font-bold uppercase tracking-wider text-white">
-                    ROBLOX GROUP
+                    VHITE STUDIOS
                   </div>
                   <div className="text-[9px] text-slate-400">
-                    Join the Veltrix Studio Roblox Group
+                    Join Vhite Studios · A Veltrix Studio company
                   </div>
                 </div>
               </div>
@@ -426,7 +426,7 @@ export default function App() {
                 rel="noreferrer"
                 className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white text-white hover:text-black text-[11px] font-bold tracking-wider uppercase transition-colors duration-200"
               >
-                <span>JOIN</span>
+                <span>JOIN VHITE STUDIOS</span>
                 <ArrowRight size={12} />
               </a>
             </div>
